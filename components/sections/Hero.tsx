@@ -2,10 +2,8 @@
 
 import { useRef, useState } from "react";
 import { motion, useSpring, useTransform } from "framer-motion";
-import Image from "next/image";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import DuoVialLogo from "@/components/ui/DuoVialLogo";
-import RadarBackground from "@/components/ui/RadarBackground";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Counter from "@/components/ui/Counter";
 import VideoModal from "@/components/ui/VideoModal";
@@ -67,21 +65,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(65,90,119,0.35)_0%,_rgba(13,27,42,0)_70%)]" />
-
-      {/* Hero background image */}
-      <div className="pointer-events-none absolute inset-0 opacity-20">
-        <Image
-          src="/images/hero.jpg"
-          alt="DuoVial hero background"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-night via-night/80 to-night" />
-      </div>
-
-      <RadarBackground waveCount={5} duration={3.5} />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(65,90,119,0.25)_0%,_rgba(7,15,24,0)_70%)]" />
 
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center">
         {/* Badge */}

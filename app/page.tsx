@@ -9,10 +9,12 @@ import Pricing from "@/components/sections/Pricing";
 import Testimonials from "@/components/sections/Testimonials";
 import Footer from "@/components/sections/Footer";
 import ScrollProgress from "@/components/ui/ScrollProgress";
+import CosmicTrails from "@/components/ui/CosmicTrails";
 
 export default function Home() {
   return (
-    <main className="relative overflow-hidden bg-night">
+    <main className="relative overflow-hidden bg-[#070F18]">
+      <CosmicTrails />
       <ScrollProgress />
       <Navbar />
       <Hero />
