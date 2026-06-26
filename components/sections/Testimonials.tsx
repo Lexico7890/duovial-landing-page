@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import KineticCarousel from "@/components/ui/KineticCarousel";
 import TiltCard from "@/components/ui/TiltCard";
@@ -9,28 +10,28 @@ const testimonials = [
     quote: "Antes tenía una dash cam de $150. Ahora uso DuoVial en mi Android viejo y funciona igual. La batería me dura toda la jornada.",
     author: "Carlos M.",
     role: "Conductor Uber",
-    avatar: "CM",
+    avatar: "/images/testimonial-1.jpg",
     color: "#00E676",
   },
   {
     quote: "El anti-somnolencia me salvó en un viaje largo. La alerta sonó justo cuando estaba perdiendo concentración en la autopista.",
     author: "Andrea L.",
     role: "Repartidora",
-    avatar: "AL",
+    avatar: "/images/testimonial-2.jpg",
     color: "#FFB300",
   },
   {
     quote: "Como padre, poder monitorear que mi hijo no se quede dormido al volante me da una paz que no tiene precio.",
     author: "Roberto S.",
     role: "Padre de conductor joven",
-    avatar: "RS",
+    avatar: "/images/testimonial-3.jpg",
     color: "#00E5FF",
   },
   {
     quote: "Tuve un choque menor y el video del buffer circular fue clave. Lo tuve en segundos, sin buscar en horas de grabación.",
     author: "Miguel T.",
     role: "Taxista",
-    avatar: "MT",
+    avatar: "/images/testimonial-4.jpg",
     color: "#FF1744",
   },
 ];
@@ -55,10 +56,15 @@ export default function Testimonials() {
                 <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm md:p-10">
                   <div className="flex items-center gap-4">
                     <div
-                      className="flex h-14 w-14 items-center justify-center rounded-full text-lg font-bold text-night"
-                      style={{ backgroundColor: testimonial.color }}
+                      className="relative h-14 w-14 overflow-hidden rounded-full"
+                      style={{ boxShadow: `0 0 0 2px ${testimonial.color}` }}
                     >
-                      {testimonial.avatar}
+                      <Image
+                        src={testimonial.avatar}
+                        alt={testimonial.author}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
                     <div>
                       <h4 className="font-bold text-white">{testimonial.author}</h4>

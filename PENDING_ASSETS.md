@@ -1,110 +1,119 @@
-# 🖼️ Assets Pendientes — DuoVial Landing Page
+# 🖼️ Assets Pendientes — DuoVial Landing Page v2.0
 
-Este documento lista todos los espacios visuales reservados para imágenes, videos o mockups que deben agregarse en el futuro. Actualmente la landing funciona 100% con SVG generados por código y animaciones, pero estos assets elevarían aún más la conversión.
+Este documento lista todos los espacios visuales reservados para imágenes, videos o mockups que deben agregarse en el futuro. Actualmente la landing funciona 100% con SVG generados por código y animaciones.
 
 ---
 
 ## 1. Hero Section
 
 **Ubicación:** `components/sections/Hero.tsx`
-**Espacio reservado:** Fondo derecho/izquierdo del hero, junto al logo central.
 **Tipo recomendado:** Video corto (15–20s) o imagen estática.
 **Contenido sugerido:**
 - Un teléfono Android montado en el parabrisas de un carro.
-- La app visible en modo Vigilante con overlay de telemetría (G-Force, velocidad).
-- Ambiente nocturno/urbano para mantener la estética.
+- La app visible en modo Vigilante con overlay de telemetría.
+- Ambiente nocturno/urbano.
 **Formato:** MP4 (loop, muted, autoplay) o WebP estático.
-**Prioridad:** Alta — es la primera impresión.
+**Prioridad:** Alta.
 
 ---
 
 ## 2. ProblemSection
 
 **Ubicación:** `components/sections/ProblemSection.tsx`
-**Espacio reservado:** Columna derecha del bloque de storytelling (debajo del blockquote).
-**Tipo recomendado:** Ilustración o imagen estilizada.
+**Tipo recomendado:** Ilustración estilizada.
 **Contenido sugerido:**
 - Dos conductores discutiendo frente a vehículos con daños menores.
-- O una ilustración de "palabra contra palabra" / falta de evidencia.
-- Debe ser no gráfica y apta para landing comercial.
-**Formato:** WebP o SVG ilustrativo.
-**Prioridad:** Media — el texto actual ya cuenta la historia.
+- O una infografía de "$50k por incidente sin evidencia".
+**Formato:** WebP o SVG.
+**Prioridad:** Media.
 
 ---
 
-## 3. HowItWorks Section
+## 3. HowItWorks Section (6 pasos)
 
 **Ubicación:** `components/sections/HowItWorks.tsx`
-**Espacio reservado:** Tarjetas laterales de cada paso (columna opuesta al texto).
-**Tipo recomendado:** 4 ilustraciones o screenshots de la app.
+**Tipo recomendado:** 6 screenshots o ilustraciones de la app.
 **Contenido sugerido por paso:**
-1. **Modo Vigilante:** Screenshot de `MonitorScreen.kt` con preview de cámara trasera y telemetría.
-2. **Detección de eventos:** Screenshot del botón de pánico y medidor G-Force.
-3. **Guardado inteligente:** Diagrama o screenshot de la lista de incidentes guardados.
-4. **Anti-Somnolencia:** Screenshot de `FatigueScreen.kt` con preview frontal y barra EAR.
+1. **Auto-Inicio:** Notificación "DuoVial detectó que estás conduciendo".
+2. **Modo Vigilante:** Screenshot de `MonitorScreen` con preview y telemetría.
+3. **Anti-Somnolencia 3 Niveles:** Visual de los 3 niveles de escalada.
+4. **Detección de eventos:** Botón de pánico + medidor G-Force + colisión.
+5. **Capa Fleet:** Geofencing + Facial + OBD II.
+6. **Offline + Limpieza:** Indicador de sincronización pendiente.
 **Formato:** WebP con bordes redondeados.
-**Prioridad:** Alta — ayuda a entender el flujo.
+**Prioridad:** Alta.
 
 ---
 
-## 4. TechSpecs Section
+## 4. TechSpecs Section (6 tabs)
 
 **Ubicación:** `components/sections/TechSpecs.tsx`
-**Espacio reservado:** No hay espacio explícito, pero se recomienda agregar un diagrama de arquitectura.
-**Tipo recomendado:** Diagrama técnico o infografía.
+**Tipo recomendado:** Diagrama de arquitectura general.
 **Contenido sugerido:**
-- Diagrama de flujo: Cámara trasera → Buffer Circular → Triggers → Guardado.
-- O diagrama de arquitectura: UI Compose ↔ Servicio Nativo ↔ CameraX ↔ ML Kit ↔ Health Connect.
-**Formato:** SVG (escalable) o WebP.
-**Prioridad:** Media — refuerza la credibilidad tech.
+- Diagrama: App Móvil → Firebase → AWS S3 → Dashboard Web → Twilio.
+**Formato:** SVG.
+**Prioridad:** Media.
 
 ---
 
-## 5. DemoSimulator Section
+## 5. FatigueLevelsSection (Anti-Somnolencia 3 Niveles)
 
-**Ubicación:** `components/sections/DemoSimulatorSection.tsx`
-**Espacio reservado:** No requiere assets externos.
-**Nota:** Los simuladores de fatiga y buffer circular están completamente implementados con SVG y estado interactivo. No se necesitan imágenes aquí.
-**Prioridad:** No aplica.
+**Ubicación:** `components/sections/FatigueLevelsSection.tsx`
+**Tipo recomendado:** Ilustraciones por nivel.
+**Contenido sugerido:**
+- Nivel 1 🟢: Icono de playlist + gasolinera + A/C.
+- Nivel 2 🟡: Pantalla roja + conductor alerta.
+- Nivel 3 🔴: SMS con mapa de ubicación.
+**Formato:** SVG o iconos.
+**Prioridad:** Baja — los emojis y textos funcionan bien.
 
 ---
 
-## 6. Pricing Section
+## 6. DashboardFleetSection (Mockup Dashboard Web)
+
+**Ubicación:** `components/sections/DashboardFleetSection.tsx`
+**Espacio reservado:** El mapa simulado y los vehículos mock son placeholders funcionales.
+**Tipo recomendado:** Screenshot real del Dashboard web (cuando esté desarrollado).
+**Contenido sugerido:**
+- Captura del dashboard con mapa en vivo, lista de vehículos y toggles.
+**Formato:** WebP o PNG full-width.
+**Prioridad:** Alta — reemplazaría el mockup actual por una imagen real.
+
+---
+
+## 7. Pricing Section (4 planes)
 
 **Ubicación:** `components/sections/Pricing.tsx`
-**Espacio reservado:** No hay espacio explícito.
-**Tipo recomendado:** Badge/iconos de métodos de pago o QR de descarga.
+**Tipo recomendado:** Badge de Google Play + iconos de pago.
 **Contenido sugerido:**
-- Iconos de Google Play, tarjetas de crédito, MercadoPago/PayU según región.
+- Badge oficial "Disponible en Google Play".
 - QR para descarga directa del APK.
-**Formato:** SVG.
-**Prioridad:** Baja.
+**Formato:** SVG + PNG.
+**Prioridad:** Media.
 
 ---
 
-## 7. Testimonials Section
+## 8. Testimonials Section
 
 **Ubicación:** `components/sections/Testimonials.tsx`
-**Espacio reservado:** Avatares circulares con iniciales.
 **Tipo recomendado:** Fotos reales de conductores (con permiso) o avatares generados.
 **Contenido sugerido:**
 - 4 fotos de rostros reales de conductores.
-- Preferiblemente diversidad de género y edad para reflejar los segmentos.
+- Diversidad de género y edad para reflejar los segmentos (Uber, reparto, flota).
 **Formato:** WebP cuadrado, 200×200px.
-**Prioridad:** Media — avatares con iniciales funcionan pero fotos reales generan más confianza.
+**Prioridad:** Media.
 
 ---
 
-## 8. Footer / CTA Final
+## 9. Footer / CTA Final
 
 **Ubicación:** `components/sections/Footer.tsx`
-**Espacio reservado:** No hay espacio explícito.
 **Tipo recomendado:** Badge de Google Play + QR.
 **Contenido sugerido:**
 - Botón "Disponible en Google Play" oficial.
 - QR que apunte al listing de Play Store.
-**Formato:** SVG + PNG del QR.
-**Prioridad:** Alta — facilita la conversión final.
+**Formato:** SVG + PNG.
+**Prioridad:** Alta.
 
 ---
 
@@ -112,10 +121,11 @@ Este documento lista todos los espacios visuales reservados para imágenes, vide
 
 - [ ] Video/imagen del Hero (teléfono en parabrisas)
 - [ ] Ilustración de ProblemSection
-- [ ] 4 screenshots de la app para HowItWorks
+- [ ] 6 screenshots de la app para HowItWorks
 - [ ] Diagrama de arquitectura para TechSpecs
+- [ ] Screenshot real del Dashboard Fleet
+- [ ] Badge Google Play + QR para Footer/Pricing
 - [ ] Fotos/avatars para Testimonials
-- [ ] Badge de Google Play + QR para Footer
 
 ---
 
@@ -128,11 +138,14 @@ landing-page/
 │   ├── hero-poster.webp
 │   ├── problem-illustration.webp
 │   ├── how-it-works/
-│   │   ├── step-1-vigilante.webp
-│   │   ├── step-2-triggers.webp
-│   │   ├── step-3-saved.webp
-│   │   └── step-4-fatigue.webp
+│   │   ├── step-1-auto-inicio.webp
+│   │   ├── step-2-vigilante.webp
+│   │   ├── step-3-fatiga.webp
+│   │   ├── step-4-eventos.webp
+│   │   ├── step-5-fleet.webp
+│   │   └── step-6-offline.webp
 │   ├── architecture-diagram.svg
+│   ├── dashboard-fleet-screenshot.webp
 │   ├── testimonials/
 │   │   ├── carlos.jpg
 │   │   ├── andrea.jpg

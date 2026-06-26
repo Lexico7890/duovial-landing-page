@@ -8,8 +8,8 @@ import MagneticButton from "@/components/ui/MagneticButton";
 const navLinks = [
   { label: "Problema", href: "#problema" },
   { label: "Solución", href: "#solucion" },
-  { label: "Demo", href: "#demo" },
-  { label: "Specs", href: "#specs" },
+  { label: "Fatiga", href: "#fatiga" },
+  { label: "Fleet", href: "#dashboard" },
   { label: "Planes", href: "#planes" },
 ];
 

@@ -2,15 +2,21 @@
 
 import { useRef, useState } from "react";
 import { motion, useSpring, useTransform } from "framer-motion";
+import Image from "next/image";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import DuoVialLogo from "@/components/ui/DuoVialLogo";
 import RadarBackground from "@/components/ui/RadarBackground";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Counter from "@/components/ui/Counter";
+import VideoModal from "@/components/ui/VideoModal";
+
+const DEMO_VIDEO_URL = "https://www.youtube.com/embed/YlUKcNNmywk?autoplay=1";
+const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.duovial.app";
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const springConfig = { stiffness: 100, damping: 30 };
   const mouseX = useSpring(0.5, springConfig);
@@ -63,6 +69,18 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(65,90,119,0.35)_0%,_rgba(13,27,42,0)_70%)]" />
 
+      {/* Hero background image */}
+      <div className="pointer-events-none absolute inset-0 opacity-20">
+        <Image
+          src="/images/hero.jpg"
+          alt="DuoVial hero background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-night via-night/80 to-night" />
+      </div>
+
       <RadarBackground waveCount={5} duration={3.5} />
 
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center">
@@ -94,7 +112,7 @@ export default function Hero() {
         {/* Subheadline */}
         <AnimatedSection animation="fade-in-up" delay={0.3} className="mt-6 text-center">
           <p className="max-w-2xl text-lg text-white/60 md:text-xl">
-            Evidencia legal instantánea + detección de fatiga con ML Kit. Sin hardware. Sin grabar horas de nada.
+            Evidencia legal instantánea + detección de fatiga con ML Kit. Para conductores individuales y flotas empresariales desde la misma app.
           </p>
         </AnimatedSection>
 
@@ -172,10 +190,10 @@ export default function Hero() {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-white md:text-4xl">
-                <Counter end={0} suffix=" GB" />
+                <Counter end={11} suffix="" />
               </div>
               <p className="mt-1 text-xs uppercase tracking-wider text-white/40 md:text-sm">
-                Desperdiciados
+                Módulos integrados
               </p>
             </div>
           </div>
@@ -189,20 +207,37 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
           <MagneticButton
-            href="#demo"
+            onClick={() => setIsVideoOpen(true)}
             className="rounded-full bg-guardian px-8 py-3.5 text-sm font-bold text-night shadow-[0_0_30px_-5px_rgba(0,230,118,0.4)] transition-shadow hover:shadow-[0_0_40px_-5px_rgba(0,230,118,0.6)]"
           >
-            Ver demo interactiva
+            <span className="flex items-center gap-2">
+              <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              Ver cómo funciona
+            </span>
           </MagneticButton>
 
           <MagneticButton
-            href="#descarga"
+            href={GOOGLE_PLAY_URL}
             className="rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/40 hover:bg-white/10"
           >
-            Descargar APK
+            <span className="flex items-center gap-2">
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" />
+              </svg>
+              Disponible en Google Play
+            </span>
           </MagneticButton>
         </motion.div>
       </div>
+
+      <VideoModal
+        isOpen={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+        videoUrl={DEMO_VIDEO_URL}
+        title="DuoVial en acción"
+      />
     </section>
   );
 }

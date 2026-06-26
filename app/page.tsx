@@ -3,7 +3,8 @@ import Hero from "@/components/sections/Hero";
 import ProblemSection from "@/components/sections/ProblemSection";
 import HowItWorks from "@/components/sections/HowItWorks";
 import TechSpecs from "@/components/sections/TechSpecs";
-import DemoSimulatorSection from "@/components/sections/DemoSimulatorSection";
+import FatigueLevelsSection from "@/components/sections/FatigueLevelsSection";
+import DashboardFleetSection from "@/components/sections/DashboardFleetSection";
 import Pricing from "@/components/sections/Pricing";
 import Testimonials from "@/components/sections/Testimonials";
 import Footer from "@/components/sections/Footer";
@@ -18,7 +19,8 @@ export default function Home() {
       <ProblemSection />
       <HowItWorks />
       <TechSpecs />
-      <DemoSimulatorSection />
+      <FatigueLevelsSection />
+      <DashboardFleetSection />
       <Pricing />
       <Testimonials />
       <Footer />

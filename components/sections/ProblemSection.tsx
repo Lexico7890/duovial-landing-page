@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import TiltCard from "@/components/ui/TiltCard";
@@ -38,6 +39,17 @@ const problems = [
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Flota invisible",
+    stat: "$50k",
+    description: "Un solo incidente puede costar hasta $50,000 USD a una empresa. Sin dashboard, sin control de zonas, sin saber quién conduce.",
+    color: "#00E5FF",
+    icon: (
+      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
     ),
   },
@@ -84,18 +96,19 @@ export default function ProblemSection() {
           </AnimatedSection>
 
           <AnimatedSection animation="fade-in-right" delay={0.2}>
-            <div className="rounded-2xl border-l-4 border-panic bg-white/5 p-8 backdrop-blur-sm">
-              <blockquote className="text-lg italic text-white/70 md:text-xl">
-                &ldquo;Me chocaron mientras conducía Uber. El otro conductor negó todo. Sin video, el seguro dijo 50/50. Yo perdí.&rdquo;
-              </blockquote>
-              <p className="mt-4 text-sm font-semibold text-white/40">
-                — Historia real que originó DuoVial
-              </p>
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10">
+              <Image
+                src="/images/problem.jpg"
+                alt="Ilustración del problema"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-night/60 to-transparent" />
             </div>
           </AnimatedSection>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {problems.map((problem, index) => (
             <AnimatedSection
               key={problem.title}
