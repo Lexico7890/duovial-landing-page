@@ -2,8 +2,10 @@
 
 import { useRef, useState } from "react";
 import { motion, useSpring, useTransform } from "framer-motion";
+import Image from "next/image";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import DuoVialLogo from "@/components/ui/DuoVialLogo";
+import RadarBackground from "@/components/ui/RadarBackground";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Counter from "@/components/ui/Counter";
 import VideoModal from "@/components/ui/VideoModal";
@@ -13,7 +15,8 @@ const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.duovi
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const springConfig = { stiffness: 100, damping: 30 };
@@ -24,19 +27,31 @@ export default function Hero() {
   const rotateY = useTransform(mouseX, [0, 1], [-12, 12]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !spotlightRef.current || !gridRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
     mouseX.set(x);
     mouseY.set(y);
-    setMousePosition({ x, y });
+
+    const xPct = x * 100;
+    const yPct = y * 100;
+
+    spotlightRef.current.style.background = `radial-gradient(800px circle at ${xPct}% ${yPct}%, rgba(0,230,118,0.08), transparent 40%)`;
+    gridRef.current.style.maskImage = `radial-gradient(ellipse at ${xPct}% ${yPct}%, black 0%, transparent 60%)`;
+    gridRef.current.style.webkitMaskImage = `radial-gradient(ellipse at ${xPct}% ${yPct}%, black 0%, transparent 60%)`;
   };
 
   const handleMouseLeave = () => {
     mouseX.set(0.5);
     mouseY.set(0.5);
-    setMousePosition({ x: 0.5, y: 0.5 });
+    if (spotlightRef.current) {
+      spotlightRef.current.style.background = `radial-gradient(800px circle at 50% 50%, rgba(0,230,118,0.08), transparent 40%)`;
+    }
+    if (gridRef.current) {
+      gridRef.current.style.maskImage = `radial-gradient(ellipse at 50% 50%, black 0%, transparent 60%)`;
+      gridRef.current.style.webkitMaskImage = `radial-gradient(ellipse at 50% 50%, black 0%, transparent 60%)`;
+    }
   };
 
   return (
@@ -48,24 +63,40 @@ export default function Hero() {
     >
       {/* Cursor spotlight */}
       <div
+        ref={spotlightRef}
         className="pointer-events-none absolute inset-0 opacity-60 transition-opacity duration-300"
         style={{
-          background: `radial-gradient(800px circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(0,230,118,0.08), transparent 40%)`,
+          background: `radial-gradient(800px circle at 50% 50%, rgba(0,230,118,0.08), transparent 40%)`,
         }}
       />
 
       {/* Grid overlay */}
       <div
+        ref={gridRef}
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `linear-gradient(rgba(0,230,118,1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,230,118,1) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
-          maskImage: `radial-gradient(ellipse at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, black 0%, transparent 60%)`,
-          WebkitMaskImage: `radial-gradient(ellipse at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, black 0%, transparent 60%)`,
+          maskImage: `radial-gradient(ellipse at 50% 50%, black 0%, transparent 60%)`,
+          WebkitMaskImage: `radial-gradient(ellipse at 50% 50%, black 0%, transparent 60%)`,
         }}
       />
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(65,90,119,0.25)_0%,_rgba(7,15,24,0)_70%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(65,90,119,0.35)_0%,_rgba(13,27,42,0)_70%)]" />
+
+      {/* Hero background image */}
+      <div className="pointer-events-none absolute inset-0 opacity-20">
+        <Image
+          src="/images/hero.jpg"
+          alt="DuoVial hero background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-night via-night/80 to-night" />
+      </div>
+
+      <RadarBackground waveCount={4} duration={3.5} />
 
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center">
         {/* Badge */}

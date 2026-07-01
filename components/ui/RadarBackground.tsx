@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useSyncExternalStore } from "react";
 
 interface RadarBackgroundProps {
   waveCount?: number;
@@ -11,8 +11,18 @@ interface RadarBackgroundProps {
 export default function RadarBackground({
   waveCount = 4,
   color = "#00E676",
-  duration = 3,
+  duration = 3.5,
 }: RadarBackgroundProps) {
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <div className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
       <div className="relative flex items-center justify-center">
@@ -28,47 +38,75 @@ export default function RadarBackground({
           const size = 120 + index * 180;
 
           return (
-            <motion.div
+            <div
               key={index}
-              className="absolute rounded-full border"
+              className="radar-ring absolute rounded-full border"
               style={{
                 width: size,
                 height: size,
                 borderColor: color,
-                boxShadow: `0 0 20px ${color}20, inset 0 0 20px ${color}10`,
-              }}
-              initial={{
-                opacity: 0,
-                scale: 0.8,
-              }}
-              animate={{
-                opacity: [0, 0.4, 0],
-                scale: [0.8, 1.8],
-              }}
-              transition={{
-                duration,
-                delay,
-                repeat: Infinity,
-                ease: "easeOut",
+                boxShadow: `0 0 24px ${color}30`,
+                animation: `radar-ping ${duration}s ease-out ${delay}s infinite`,
               }}
             />
           );
         })}
 
         {/* Subtle sweep line rotating from center */}
-        <motion.div
-          className="absolute h-[400px] w-[400px] rounded-full"
+        <div
+          className="radar-sweep absolute h-[400px] w-[400px] rounded-full"
           style={{
-            background: `conic-gradient(from 0deg, transparent 0deg, ${color}15 30deg, transparent 60deg)`,
-          }}
-          animate={{ rotate: 360 }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "linear",
+            background: `conic-gradient(from 0deg, transparent 0deg, ${color}12 30deg, transparent 60deg)`,
+            animation: "radar-sweep 4s linear infinite",
           }}
         />
       </div>
+
+      <style jsx>{`
+        @keyframes radar-ping {
+          0% {
+            opacity: 0;
+            transform: translateZ(0) scale(0.8);
+          }
+          15% {
+            opacity: 0.35;
+          }
+          100% {
+            opacity: 0;
+            transform: translateZ(0) scale(1.8);
+          }
+        }
+
+        @keyframes radar-sweep {
+          from {
+            transform: translateZ(0) rotate(0deg);
+          }
+          to {
+            transform: translateZ(0) rotate(360deg);
+          }
+        }
+
+        .radar-ring,
+        .radar-sweep {
+          will-change: transform, opacity;
+          transform: translateZ(0);
+          backface-visibility: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .radar-ring,
+          .radar-sweep {
+            animation: none !important;
+            opacity: 0.15 !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .radar-ring {
+            opacity: 0.6 !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
